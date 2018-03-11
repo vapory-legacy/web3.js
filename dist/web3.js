@@ -2938,8 +2938,8 @@ var checkForContractAddress = function(contract, callback){
  * @method ContractFactory
  * @param {Array} abi
  */
-var ContractFactory = function (eth, abi) {
-    this.vap = eth;
+var ContractFactory = function (vap, abi) {
+    this.vap = vap;
     this.abi = abi;
 
     /**
@@ -5496,7 +5496,7 @@ Vap.prototype.contract = function (abi) {
 };
 
 Vap.prototype.filter = function (options, callback, filterCreationErrorCallback) {
-    return new Filter(options, 'eth', this._requestManager, watches.vap(), formatters.outputLogFormatter, callback, filterCreationErrorCallback);
+    return new Filter(options, 'vap', this._requestManager, watches.vap(), formatters.outputLogFormatter, callback, filterCreationErrorCallback);
 };
 
 Vap.prototype.namereg = function () {
@@ -6003,7 +6003,7 @@ module.exports = Swarm;
 var Method = require('../method');
 
 /// @returns an array of objects describing web3.vap.filter api methods
-var eth = function () {
+var vap = function () {
     var newFilterCall = function (args) {
         var type = args[0];
 
