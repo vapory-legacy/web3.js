@@ -118,19 +118,19 @@ var tests = [{
     formattedArgs: ['0x47d33b27bb249a2dbab4c0612bf9caf4c1950855', '0x2'],
     result: blockResult,
     formattedResult: formattedBlockResult,
-    call: 'eth_getUncleByBlockHashAndIndex'
+    call: 'vapgetUncleByBlockHashAndIndex'
 },{
     args: [436, 1],
     formattedArgs: ['0x1b4', '0x1'],
     result: blockResult,
     formattedResult: formattedBlockResult,
-    call: 'eth_getUncleByBlockNumberAndIndex'
+    call: 'vapgetUncleByBlockNumberAndIndex'
 },{
     args: [436, 1, true],
     formattedArgs: ['0x1b4', '0x1'],
     result: blockResultWithTx,
     formattedResult: formattedBlockResultWithTx,
-    call: 'eth_getUncleByBlockNumberAndIndex'
+    call: 'vapgetUncleByBlockNumberAndIndex'
 }];
 
-testMethod.runTests('eth', method, tests);
+testMethod.runTests('vap', method, tests);

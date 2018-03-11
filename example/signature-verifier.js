@@ -1,10 +1,10 @@
 /**
  * This utility module helps to demonstrate following features
- * a. Signing a message by an Ethereum user
+ * a. Signing a message by an Vapory user
  * b. Finding the account address using which the message was signed
  */
 var Web3 = require('../index.js');
-var ethURL = ""; 
+var vapURL = ""; 
 var defaultAc = ""; 
 var defaultAcPWD=""; 
 var signatureContractCodeReadable="\n\tcontract SignatureVerifier {\n\t\tfunction verify( bytes32 hash, uint8 v, bytes32 r, bytes32 s) \n"+ 
@@ -16,7 +16,7 @@ var sigContractInstance = null;
 var strAbi='[{"constant":true,"inputs":[{"name":"hash","type":"bytes32"},{"name":"v","type":"uint8"},{"name":"r","type":"bytes32"},{"name":"s","type":"bytes32"}],"name":"verify","outputs":[{"name":"returnAddress","type":"address"}],"payable":false,"type":"function"}]';
 var signMessage=""; 
 
-var ethWeb3 = null;
+var vapWeb3 = null;
 
 function setContractAddress(conAddress){
     sigContractAddress = conAddress;
@@ -30,24 +30,24 @@ function setPassword(pwd){
     defaultAcPWD = pwd;
 }
 
-function setEthereumURL(url){
-    ethURL = url;
+function setVaporyURL(url){
+    vapURL = url;
 }
 
 function setMessage(msg){
     signMessage = msg;
 }
 
-function initializeEthereumConnection(){
-   if(ethWeb3!=null && ethWeb3.isConnected()==true)  {
+function initializeVaporyConnection(){
+   if(vapWeb3!=null && vapWeb3.isConnected()==true)  {
     return true;
   }
   
-  ethWeb3 = new Web3(new Web3.providers.HttpProvider(ethURL));
+  vapWeb3 = new Web3(new Web3.providers.HttpProvider(vapURL));
   
-  if(ethWeb3.isConnected()==true){
+  if(vapWeb3.isConnected()==true){
       if(defaultAc==''){
-        defaultAc=ethWeb3.eth.accounts[1];
+        defaultAc=vapWeb3.vap.accounts[1];
       }
       return true;
   }
@@ -57,7 +57,7 @@ function initializeEthereumConnection(){
 
 function unlockAccount(acAddress){
   if(acAddress!=undefined && acAddress!=null){
-    var state=ethWeb3.personal.unlockAccount(defaultAc, defaultAcPWD, 100);
+    var state=vapWeb3.personal.unlockAccount(defaultAc, defaultAcPWD, 100);
     return state;
   }
 
@@ -66,46 +66,46 @@ function unlockAccount(acAddress){
 
 
 function initializeContract(){
-    initializeEthereumConnection();
-    if(ethWeb3.isConnected()==false){
+    initializeVaporyConnection();
+    if(vapWeb3.isConnected()==false){
         return;
     }  
     var abi = JSON.parse(strAbi);
-    var contract = ethWeb3.eth.contract(abi);
+    var contract = vapWeb3.vap.contract(abi);
 
     sigContractInstance =  contract.at(sigContractAddress)  
 }
 
 function signMessage(message){
 
-    initializeEthereumConnection();
-    if(ethWeb3.isConnected()==false){
+    initializeVaporyConnection();
+    if(vapWeb3.isConnected()==false){
         return false;
     }
     
     var state=unlockAccount(defaultAc);
     
     const msg = new Buffer(message);
-    const sig = ethWeb3.eth.sign(defaultAc, '0x' + msg.toString('hex'));
+    const sig = vapWeb3.vap.sign(defaultAc, '0x' + msg.toString('hex'));
 
     return sig;
 }
 
 function verifySignedByAc(message, sig){
-    initializeEthereumConnection();
+    initializeVaporyConnection();
 
-    if(ethWeb3.isConnected()==false){
+    if(vapWeb3.isConnected()==false){
         return false;
     }
     initializeContract();
 
     const res = splitSig(sig);
 
-    // Unfortunately Geth client adds this line to the message as a prefix while signing
+    // Unfortunately Gvap client adds this line to the message as a prefix while signing
     // So while finding who signed it we need to prefix this part 
-    const prefix = new Buffer("\x19Ethereum Signed Message:\n");
+    const prefix = new Buffer("\x19Vapory Signed Message:\n");
     const msg = new Buffer(message);
-    const prefixedMsg = ethWeb3.sha3(
+    const prefixedMsg = vapWeb3.sha3(
     Buffer.concat([prefix, new Buffer(String(msg.length)), msg]).toString('utf8')
     );
 
@@ -118,7 +118,7 @@ function verifySignedByAc(message, sig){
 
 function splitSig(sig) {
   return {
-    v: ethWeb3.toDecimal('0x' + sig.slice(130, 132)),
+    v: vapWeb3.toDecimal('0x' + sig.slice(130, 132)),
     r: sig.slice(0, 66),
     s: sig.slice(66, 130)
   }
@@ -142,18 +142,18 @@ function execute(){
     console.log("\n\n**********************************************************************");
     console.log("Steps to Run");
     console.log("**********************************************************************");
-    console.log("1. Deploy the following conract in your ethereum environment");
+    console.log("1. Deploy the following conract in your vapory environment");
     console.log(signatureContractCodeReadable);
     console.log("2. Set the following parameters (i.e. at the end of the code)");
-    console.log("\ta. Ethereum URL");
-    console.log("\tb. Ethereum Account Address");
-    console.log("\tc. Ethereum Account Passphrase");
+    console.log("\ta. Vapory URL");
+    console.log("\tb. Vapory Account Address");
+    console.log("\tc. Vapory Account Passphrase");
     console.log("\td. Signature Contract Address");
     console.log("\te. Message for signing");
     console.log("**********************************************************************");
 
-    if(ethURL==''){
-        console.log("Error: Ethereum URL is not specified");
+    if(vapURL==''){
+        console.log("Error: Vapory URL is not specified");
         return;
     }
     if(defaultAc==''){
@@ -175,9 +175,9 @@ function execute(){
     
 
     console.log("Following parameters applied");
-    console.log("\ta. Ethereum URL                  :",ethURL);
-    console.log("\tb. Ethereum Account Address      :",defaultAc);
-    console.log("\tc. Ethereum Account Passphrase   :",defaultAcPWD);
+    console.log("\ta. Vapory URL                  :",vapURL);
+    console.log("\tb. Vapory Account Address      :",defaultAc);
+    console.log("\tc. Vapory Account Passphrase   :",defaultAcPWD);
     console.log("\td. Signature Contract Address    :",sigContractAddress);
     console.log("\te. Message for signing           :",signMessage);
 
@@ -200,7 +200,7 @@ function execute(){
 
 // Please uncomment the below listed three lines of code and provide the required values
 
-// Value 1- Please provide the ethereum account address which you want to use to perform the operation
+// Value 1- Please provide the vapory account address which you want to use to perform the operation
 //setAccount('<Provide the account address>');
 
 // Value 2- Please provide the password of the accound to be used 
@@ -212,9 +212,9 @@ function execute(){
 //setContractAddress('<Provide the deployed contract address>');
 
 // Value 4- If required please update with a different message
-setEthereumURL('http://localhost:8545');
+setVaporyURL('http://localhost:8545');
 
-// Value 5- If required please update with a Ethereum URL
+// Value 5- If required please update with a Vapory URL
 setMessage('This the test sign message');
 
 

@@ -11,7 +11,7 @@
 *un~
 .DS_Store
 */**/.DS_Store
-ethereum/ethereum
+vapory/vapory
 ethereal/ethereal
 example/js
 node_modules

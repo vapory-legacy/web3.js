@@ -6,35 +6,35 @@ var FakeHttpProvider = require('./helpers/FakeHttpProvider');
 var utils = require('../lib/utils/utils');
 
 var tests = [{
-    protocol: 'eth',
+    protocol: 'vap',
     args: ['latest'],
     firstResult: 1,
     firstPayload: {
-        method: "eth_newBlockFilter",
+        method: "vapnewBlockFilter",
         params: []
     },
     secondResult: ['0x1234'],
     secondPayload: {
-        method: "eth_getFilterChanges"
+        method: "vapgetFilterChanges"
     }
 },
 {
-    protocol: 'eth',
+    protocol: 'vap',
     args: ['pending'],
     firstResult: 1,
     firstPayload: {
-        method: "eth_newPendingTransactionFilter",
+        method: "vapnewPendingTransactionFilter",
         params: []
     },
     secondResult: ['0x1234'],
     secondPayload: {
-        method: "eth_getFilterChanges"
+        method: "vapgetFilterChanges"
     }
 }];
 
 var testPolling = function (tests) {
     
-    describe('web3.eth.filter.polling', function () {
+    describe('web3.vap.filter.polling', function () {
         tests.forEach(function (test, index) {
             it('should create && successfully poll filter', function (done) {
 
