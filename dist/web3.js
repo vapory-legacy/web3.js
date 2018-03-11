@@ -5960,7 +5960,7 @@ Vap.prototype.contract = function (abi) {
 };
 
 Vap.prototype.filter = function (options, callback, filterCreationErrorCallback) {
-    return new Filter(options, 'eth', this._requestManager, watches.vap(), formatters.outputLogFormatter, callback, filterCreationErrorCallback);
+    return new Filter(options, 'vap', this._requestManager, watches.vap(), formatters.outputLogFormatter, callback, filterCreationErrorCallback);
 };
 
 Vap.prototype.namereg = function () {
