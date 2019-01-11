@@ -18,7 +18,7 @@ var tests = [{
     },
     result: '0xb',
     formattedResult: '0xb',
-    call: 'eth_'+ method
+    call: 'vap_'+ method
 }];
 
 describe('async', function () {
@@ -36,7 +36,7 @@ describe('async', function () {
             });
 
             // when 
-            web3.eth[method](test.input, function(error, result){
+            web3.vap[method](test.input, function(error, result){
 
                 // then
                 assert.isNull(error);
@@ -63,7 +63,7 @@ describe('async', function () {
             });
 
             // when 
-            web3.eth[method](test.input, function(error, result){
+            web3.vap[method](test.input, function(error, result){
 
                 // then
                 assert.isUndefined(result);
