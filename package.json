@@ -1,5 +1,5 @@
 {
-  "name": "web3",
+  "name": "@vapory/web3",
   "namespace": "vapory",
   "version": "0.20.4",
   "description": "Vapory JavaScript API, middleware to talk to a vapory node over RPC",
