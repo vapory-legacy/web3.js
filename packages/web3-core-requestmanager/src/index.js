@@ -16,7 +16,7 @@
 */
 /**
  * @file index.js
- * @author Fabian Vogelsteller <fabian@ethereum.org>
+ * @author Fabian Vogelsteller <fabian@vapory.org>
  * @date 2017
  */
 
@@ -33,7 +33,7 @@ var givenProvider = require('./givenProvider.js');
 
     /**
  * It's responsible for passing messages to providers
- * It's also responsible for polling the ethereum node for incoming messages
+ * It's also responsible for polling the vapory node for incoming messages
  * Default poll timeout is 1 second
  * Singleton
  */

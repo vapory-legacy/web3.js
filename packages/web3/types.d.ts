@@ -2,7 +2,7 @@ import { BigNumber } from 'bn.js'
 import * as us from 'underscore'
 
 
-//'{"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{see above}],"id":1}'
+//'{"jsonrpc":"2.0","method":"vap_sendTransaction","params":[{see above}],"id":1}'
 export declare interface JsonRPCRequest {
   jsonrpc: string
   method: string
@@ -267,7 +267,7 @@ export declare interface IpcProvider extends IProvider {
   reset(): undefined
 }
 export type Provider = WebsocketProvider | IpcProvider | HttpProvider;
-type Unit = "kwei" | "femtoether" | "babbage" | "mwei" | "picoether" | "lovelace" | "qwei" | "nanoether" | "shannon" | "microether" | "szabo" | "nano" | "micro" | "milliether" | "finney" | "milli" | "ether" | "kether" | "grand" | "mether" | "gether" | "tether"
+type Unit = "kwei" | "femtovapor" | "babbage" | "mwei" | "picovapor" | "lovelace" | "qwei" | "nanovapor" | "shannon" | "microvapor" | "szabo" | "nano" | "micro" | "millivapor" | "finney" | "milli" | "vapor" | "kvapor" | "grand" | "mvapor" | "gvapor" | "tvapor"
 export type BlockType = "latest" | "pending" | "genesis" | number
 export declare interface Iban { }
 export declare interface Utils {
@@ -351,7 +351,7 @@ export declare interface Providers {
   IpcProvider: new (path: string, net: any) => IpcProvider
 }
 
-export declare class Eth {
+export declare class Vap {
   defaultAccount: string
   defaultBlock: BlockType
   BatchRequest: new () => BatchRequest

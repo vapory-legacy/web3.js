@@ -16,7 +16,7 @@
 */
 /** @file index.js
  * @authors:
- *   Fabian Vogelsteller <fabian@ethereum.org>
+ *   Fabian Vogelsteller <fabian@vapory.org>
  * @date 2017
  */
 

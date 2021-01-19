@@ -33,7 +33,7 @@ var Web3Method = require('web3-core-method');
 
 var method = new Web3Method({
     name: 'sendTransaction',
-    call: 'eth_sendTransaction',
+    call: 'vap_sendTransaction',
     params: 1,
     inputFormatter: [inputTransactionFormatter]
 });
@@ -44,6 +44,6 @@ myCoolLib.sendTransaction({...}, function(){ ... });
 
 
 [docs]: http://web3js.readthedocs.io/en/1.0/
-[repo]: https://github.com/ethereum/web3.js
+[repo]: https://github.com/vaporyco/web3.js
 
 

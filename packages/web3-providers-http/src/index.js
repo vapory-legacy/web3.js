@@ -18,7 +18,7 @@
  * @authors:
  *   Marek Kotewicz <marek@parity.io>
  *   Marian Oancea
- *   Fabian Vogelsteller <fabian@ethereum.org>
+ *   Fabian Vogelsteller <fabian@vapory.org>
  * @date 2015
  */
 

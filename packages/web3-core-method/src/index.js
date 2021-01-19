@@ -16,7 +16,7 @@
 */
 /**
  * @file index.js
- * @author Fabian Vogelsteller <fabian@ethereum.org>
+ * @author Fabian Vogelsteller <fabian@vapory.org>
  * @author Marek Kotewicz <marek@parity.io>
  * @date 2017
  */
@@ -49,7 +49,7 @@ var Method = function Method(options) {
 
     this.requestManager = options.requestManager;
 
-    // reference to eth.accounts
+    // reference to vap.accounts
     this.accounts = options.accounts;
 
     this.defaultBlock = options.defaultBlock || 'latest';
@@ -59,7 +59,7 @@ var Method = function Method(options) {
 Method.prototype.setRequestManager = function (requestManager, accounts) {
     this.requestManager = requestManager;
 
-    // reference to eth.accounts
+    // reference to vap.accounts
     if (accounts) {
         this.accounts = accounts;
     }
@@ -205,17 +205,17 @@ Method.prototype._confirmTransaction = function (defer, result, payload) {
 
 
     // add custom send Methods
-    var _ethereumCalls = [
+    var _vaporyCalls = [
         new Method({
             name: 'getTransactionReceipt',
-            call: 'eth_getTransactionReceipt',
+            call: 'vap_getTransactionReceipt',
             params: 1,
             inputFormatter: [null],
             outputFormatter: formatters.outputTransactionReceiptFormatter
         }),
         new Method({
             name: 'getCode',
-            call: 'eth_getCode',
+            call: 'vap_getCode',
             params: 2,
             inputFormatter: [formatters.inputAddressFormatter, formatters.inputDefaultBlockNumberFormatter]
         }),
@@ -231,10 +231,10 @@ Method.prototype._confirmTransaction = function (defer, result, payload) {
             }
         })
     ];
-    // attach methods to this._ethereumCall
-    var _ethereumCall = {};
-    _.each(_ethereumCalls, function (mthd) {
-        mthd.attachToObject(_ethereumCall);
+    // attach methods to this._vaporyCall
+    var _vaporyCall = {};
+    _.each(_vaporyCalls, function (mthd) {
+        mthd.attachToObject(_vaporyCall);
         mthd.requestManager = method.requestManager; // assign rather than call setRequestManager()
     });
 
@@ -251,7 +251,7 @@ Method.prototype._confirmTransaction = function (defer, result, payload) {
                 };
             }
             // if we have a valid receipt we don't need to send a request
-            return (existingReceipt ? promiEvent.resolve(existingReceipt) : _ethereumCall.getTransactionReceipt(result))
+            return (existingReceipt ? promiEvent.resolve(existingReceipt) : _vaporyCall.getTransactionReceipt(result))
             // catch error from requesting receipt
             .catch(function (err) {
                 sub.unsubscribe();
@@ -301,7 +301,7 @@ Method.prototype._confirmTransaction = function (defer, result, payload) {
                         return utils._fireError(new Error('The transaction receipt didn\'t contain a contract address.'), defer.eventEmitter, defer.reject);
                     }
 
-                    _ethereumCall.getCode(receipt.contractAddress, function (e, code) {
+                    _vaporyCall.getCode(receipt.contractAddress, function (e, code) {
 
                         if (!code) {
                             return;
@@ -388,7 +388,7 @@ Method.prototype._confirmTransaction = function (defer, result, payload) {
   var startWatching = function() {
       // if provider allows PUB/SUB
       if (_.isFunction(this.requestManager.provider.on)) {
-          _ethereumCall.subscribe('newBlockHeaders', checkConfirmation);
+          _vaporyCall.subscribe('newBlockHeaders', checkConfirmation);
       } else {
           intervalId = setInterval(checkConfirmation, 1000);
       }
@@ -396,7 +396,7 @@ Method.prototype._confirmTransaction = function (defer, result, payload) {
 
 
   // first check if we already have a confirmed transaction
-  _ethereumCall.getTransactionReceipt(result)
+  _vaporyCall.getTransactionReceipt(result)
   .then(function(receipt) {
       if (receipt && receipt.blockHash) {
           if (defer.eventEmitter.listeners('confirmation').length > 0) {
@@ -439,7 +439,7 @@ var getWallet = function(from, accounts) {
 
 Method.prototype.buildCall = function() {
     var method = this,
-        isSendTx = (method.call === 'eth_sendTransaction' || method.call === 'eth_sendRawTransaction'); // || method.call === 'personal_sendTransaction'
+        isSendTx = (method.call === 'vap_sendTransaction' || method.call === 'vap_sendRawTransaction'); // || method.call === 'personal_sendTransaction'
 
     // actual send function
     var send = function () {
@@ -492,7 +492,7 @@ Method.prototype.buildCall = function() {
         var sendSignedTx = function(sign){
 
             var signedPayload = _.extend({}, payload, {
-                method: 'eth_sendRawTransaction',
+                method: 'vap_sendRawTransaction',
                 params: [sign.rawTransaction]
             });
 
@@ -505,8 +505,8 @@ Method.prototype.buildCall = function() {
             if (method && method.accounts && method.accounts.wallet && method.accounts.wallet.length) {
                 var wallet;
 
-                // ETH_SENDTRANSACTION
-                if (payload.method === 'eth_sendTransaction') {
+                // VAP_SENDTRANSACTION
+                if (payload.method === 'vap_sendTransaction') {
                     var tx = payload.params[0];
                     wallet = getWallet((_.isObject(tx)) ? tx.from : null, method.accounts);
 
@@ -518,8 +518,8 @@ Method.prototype.buildCall = function() {
                         return (_.isFunction(signature.then)) ? signature.then(sendSignedTx) : sendSignedTx(signature);
                     }
 
-                // ETH_SIGN
-                } else if (payload.method === 'eth_sign') {
+                // VAP_SIGN
+                } else if (payload.method === 'vap_sign') {
                     var data = payload.params[1];
                     wallet = getWallet(payload.params[0], method.accounts);
 
@@ -547,7 +547,7 @@ Method.prototype.buildCall = function() {
 
             var getGasPrice = (new Method({
                 name: 'getGasPrice',
-                call: 'eth_gasPrice',
+                call: 'vap_gasPrice',
                 params: 0
             })).createFunction(method.requestManager);
 
