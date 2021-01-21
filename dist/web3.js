@@ -1,4 +1,4 @@
-require=(function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(require,module,exports){
+require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 module.exports=[
   {
     "constant": true,
@@ -5661,23 +5661,23 @@ var Iban = require('../iban');
 var transfer = require('../transfer');
 
 var blockCall = function (args) {
-    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? "vapgetBlockByHash" : "vapgetBlockByNumber";
+    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? "vap_getBlockByHash" : "vap_getBlockByNumber";
 };
 
 var transactionFromBlockCall = function (args) {
-    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'vapgetTransactionByBlockHashAndIndex' : 'vapgetTransactionByBlockNumberAndIndex';
+    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'vap_getTransactionByBlockHashAndIndex' : 'vap_getTransactionByBlockNumberAndIndex';
 };
 
 var uncleCall = function (args) {
-    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'vapgetUncleByBlockHashAndIndex' : 'vapgetUncleByBlockNumberAndIndex';
+    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'vap_getUncleByBlockHashAndIndex' : 'vap_getUncleByBlockNumberAndIndex';
 };
 
 var getBlockTransactionCountCall = function (args) {
-    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'vapgetBlockTransactionCountByHash' : 'vapgetBlockTransactionCountByNumber';
+    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'vap_getBlockTransactionCountByHash' : 'vap_getBlockTransactionCountByNumber';
 };
 
 var uncleCountCall = function (args) {
-    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'vapgetUncleCountByBlockHash' : 'vapgetUncleCountByBlockNumber';
+    return (utils.isString(args[0]) && args[0].indexOf('0x') === 0) ? 'vap_getUncleCountByBlockHash' : 'vap_getUncleCountByBlockNumber';
 };
 
 function Vap(web3) {
@@ -5723,7 +5723,7 @@ Object.defineProperty(Vap.prototype, 'defaultAccount', {
 var methods = function () {
     var getBalance = new Method({
         name: 'getBalance',
-        call: 'vapgetBalance',
+        call: 'vap_getBalance',
         params: 2,
         inputFormatter: [formatters.inputAddressFormatter, formatters.inputDefaultBlockNumberFormatter],
         outputFormatter: formatters.outputBigNumberFormatter
@@ -5731,14 +5731,14 @@ var methods = function () {
 
     var getStorageAt = new Method({
         name: 'getStorageAt',
-        call: 'vapgetStorageAt',
+        call: 'vap_getStorageAt',
         params: 3,
         inputFormatter: [null, utils.toHex, formatters.inputDefaultBlockNumberFormatter]
     });
 
     var getCode = new Method({
         name: 'getCode',
-        call: 'vapgetCode',
+        call: 'vap_getCode',
         params: 2,
         inputFormatter: [formatters.inputAddressFormatter, formatters.inputDefaultBlockNumberFormatter]
     });
@@ -5762,7 +5762,7 @@ var methods = function () {
 
     var getCompilers = new Method({
         name: 'getCompilers',
-        call: 'vapgetCompilers',
+        call: 'vap_getCompilers',
         params: 0
     });
 
@@ -5784,7 +5784,7 @@ var methods = function () {
 
     var getTransaction = new Method({
         name: 'getTransaction',
-        call: 'vapgetTransactionByHash',
+        call: 'vap_getTransactionByHash',
         params: 1,
         outputFormatter: formatters.outputTransactionFormatter
     });
@@ -5799,14 +5799,14 @@ var methods = function () {
 
     var getTransactionReceipt = new Method({
         name: 'getTransactionReceipt',
-        call: 'vapgetTransactionReceipt',
+        call: 'vap_getTransactionReceipt',
         params: 1,
         outputFormatter: formatters.outputTransactionReceiptFormatter
     });
 
     var getTransactionCount = new Method({
         name: 'getTransactionCount',
-        call: 'vapgetTransactionCount',
+        call: 'vap_getTransactionCount',
         params: 2,
         inputFormatter: [null, formatters.inputDefaultBlockNumberFormatter],
         outputFormatter: utils.toDecimal
@@ -5814,42 +5814,42 @@ var methods = function () {
 
     var sendRawTransaction = new Method({
         name: 'sendRawTransaction',
-        call: 'vapsendRawTransaction',
+        call: 'vap_sendRawTransaction',
         params: 1,
         inputFormatter: [null]
     });
 
     var sendTransaction = new Method({
         name: 'sendTransaction',
-        call: 'vapsendTransaction',
+        call: 'vap_sendTransaction',
         params: 1,
         inputFormatter: [formatters.inputTransactionFormatter]
     });
 
     var signTransaction = new Method({
         name: 'signTransaction',
-        call: 'vapsignTransaction',
+        call: 'vap_signTransaction',
         params: 1,
         inputFormatter: [formatters.inputTransactionFormatter]
     });
 
     var sign = new Method({
         name: 'sign',
-        call: 'vapsign',
+        call: 'vap_sign',
         params: 2,
         inputFormatter: [formatters.inputAddressFormatter, null]
     });
 
     var call = new Method({
         name: 'call',
-        call: 'vapcall',
+        call: 'vap_call',
         params: 2,
         inputFormatter: [formatters.inputCallFormatter, formatters.inputDefaultBlockNumberFormatter]
     });
 
     var estimateGas = new Method({
         name: 'estimateGas',
-        call: 'vapestimateGas',
+        call: 'vap_estimateGas',
         params: 1,
         inputFormatter: [formatters.inputCallFormatter],
         outputFormatter: utils.toDecimal
@@ -5857,31 +5857,31 @@ var methods = function () {
 
     var compileSolidity = new Method({
         name: 'compile.solidity',
-        call: 'vapcompileSolidity',
+        call: 'vap_compileSolidity',
         params: 1
     });
 
     var compileLLL = new Method({
         name: 'compile.lll',
-        call: 'vapcompileLLL',
+        call: 'vap_compileLLL',
         params: 1
     });
 
     var compileSerpent = new Method({
         name: 'compile.serpent',
-        call: 'vapcompileSerpent',
+        call: 'vap_compileSerpent',
         params: 1
     });
 
     var submitWork = new Method({
         name: 'submitWork',
-        call: 'vapsubmitWork',
+        call: 'vap_submitWork',
         params: 3
     });
 
     var getWork = new Method({
         name: 'getWork',
-        call: 'vapgetWork',
+        call: 'vap_getWork',
         params: 0
     });
 
@@ -5917,39 +5917,39 @@ var properties = function () {
     return [
         new Property({
             name: 'coinbase',
-            getter: 'vapcoinbase'
+            getter: 'vap_coinbase'
         }),
         new Property({
             name: 'mining',
-            getter: 'vapmining'
+            getter: 'vap_mining'
         }),
         new Property({
             name: 'hashrate',
-            getter: 'vaphashrate',
+            getter: 'vap_hashrate',
             outputFormatter: utils.toDecimal
         }),
         new Property({
             name: 'syncing',
-            getter: 'vapsyncing',
+            getter: 'vap_syncing',
             outputFormatter: formatters.outputSyncingFormatter
         }),
         new Property({
             name: 'gasPrice',
-            getter: 'vapgasPrice',
+            getter: 'vap_gasPrice',
             outputFormatter: formatters.outputBigNumberFormatter
         }),
         new Property({
             name: 'accounts',
-            getter: 'vapaccounts'
+            getter: 'vap_accounts'
         }),
         new Property({
             name: 'blockNumber',
-            getter: 'vapblockNumber',
+            getter: 'vap_blockNumber',
             outputFormatter: utils.toDecimal
         }),
         new Property({
             name: 'protocolVersion',
-            getter: 'vapprotocolVersion'
+            getter: 'vap_protocolVersion'
         })
     ];
 };
@@ -6976,14 +6976,14 @@ module.exports = transfer;
 
 }));
 },{"./cipher-core":52,"./core":53,"./enc-base64":54,"./evpkdf":56,"./md5":61}],52:[function(require,module,exports){
-;(function (root, factory) {
+;(function (root, factory, undef) {
 	if (typeof exports === "object") {
 		// CommonJS
-		module.exports = exports = factory(require("./core"));
+		module.exports = exports = factory(require("./core"), require("./evpkdf"));
 	}
 	else if (typeof define === "function" && define.amd) {
 		// AMD
-		define(["./core"], factory);
+		define(["./core", "./evpkdf"], factory);
 	}
 	else {
 		// Global (browser)
@@ -7444,11 +7444,16 @@ module.exports = transfer;
 	                var modeCreator = mode.createEncryptor;
 	            } else /* if (this._xformMode == this._DEC_XFORM_MODE) */ {
 	                var modeCreator = mode.createDecryptor;
-
 	                // Keep at least one block in the buffer for unpadding
 	                this._minBufferSize = 1;
 	            }
-	            this._mode = modeCreator.call(mode, this, iv && iv.words);
+
+	            if (this._mode && this._mode.__creator == modeCreator) {
+	                this._mode.init(this, iv && iv.words);
+	            } else {
+	                this._mode = modeCreator.call(mode, this, iv && iv.words);
+	                this._mode.__creator = modeCreator;
+	            }
 	        },
 
 	        _doProcessBlock: function (words, offset) {
@@ -7851,7 +7856,7 @@ module.exports = transfer;
 
 
 }));
-},{"./core":53}],53:[function(require,module,exports){
+},{"./core":53,"./evpkdf":56}],53:[function(require,module,exports){
 ;(function (root, factory) {
 	if (typeof exports === "object") {
 		// CommonJS
