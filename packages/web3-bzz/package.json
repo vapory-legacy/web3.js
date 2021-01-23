@@ -1,6 +1,9 @@
 {
-    "name": "web3-bzz",
+    "name": "@vapory/web3-bzz",
     "namespace": "vapory",
+    "publishConfig": {
+        "access": "public"
+    },
     "version": "1.0.0-beta.28",
     "description": "Web3 module to interact with the Swarm network.",
     "repository": "https://github.com/vaporyco/web3.js/tree/master/packages/web3-bzz",

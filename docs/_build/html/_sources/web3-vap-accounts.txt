@@ -14,7 +14,7 @@ To use this package standalone use:
 
 .. code-block:: javascript
 
-    var Accounts = require('web3-vap-accounts');
+    var Accounts = require('@vapory/web3-vap-accounts');
 
     // Passing in the vap or web3 package is necessary to allow retrieving chainId, gasPrice and nonce automatically
     // for accounts.signTransaction().

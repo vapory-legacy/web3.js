@@ -29,7 +29,7 @@ This will expose the `Web3VapPersonal` object on the window object.
 
 ```js
 // in node.js
-var Web3VapPersonal = require('web3-vap-personal');
+var Web3VapPersonal = require('@vapory/web3-vap-personal');
 
 var personal = new Web3VapPersonal('ws://localhost:8546');
 ```

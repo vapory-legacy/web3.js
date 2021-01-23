@@ -1,6 +1,9 @@
 {
-  "name": "web3",
+  "name": "@vapory/web3",
   "namespace": "vapory",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "1.0.0-beta.28",
   "description": "Vapory JavaScript API",
   "repository": "https://github.com/vaporyco/web3.js/tree/master/packages/web3",
@@ -43,12 +46,12 @@
     }
   ],
   "dependencies": {
-    "web3-bzz": "1.0.0-beta.28",
-    "web3-core": "1.0.0-beta.28",
-    "web3-vap": "1.0.0-beta.28",
-    "web3-vap-personal": "1.0.0-beta.28",
-    "web3-net": "1.0.0-beta.28",
-    "web3-shh": "1.0.0-beta.28",
-    "web3-utils": "1.0.0-beta.28"
+    "@vapory/web3-bzz": "1.0.0-beta.28",
+    "@vapory/web3-core": "1.0.0-beta.28",
+    "@vapory/web3-net": "1.0.0-beta.28",
+    "@vapory/web3-shh": "1.0.0-beta.28",
+    "@vapory/web3-utils": "1.0.0-beta.28",
+    "@vapory/web3-vap": "1.0.0-beta.28",
+    "@vapory/web3-vap-personal": "1.0.0-beta.28"
   }
 }

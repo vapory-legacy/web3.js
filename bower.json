@@ -1,6 +1,6 @@
 {
   "namespace": "vapory",
-  "name": "web3",
+  "name": "@vapory/web3",
   "version": "1.0.0-beta.28",
   "description": "Vapory JavaScript API",
   "license": "LGPL-3.0",

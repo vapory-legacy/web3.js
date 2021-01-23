@@ -29,7 +29,7 @@ This will expose the `Web3VapAbi` object on the window object.
 
 ```js
 // in node.js
-var Web3VapAbi = require('web3-vap-abi');
+var Web3VapAbi = require('@vapory/web3-vap-abi');
 
 Web3VapAbi.encodeFunctionSignature('myMethod(uint256,string)');
 > '0x24ee0097'

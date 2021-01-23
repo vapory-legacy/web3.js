@@ -15,7 +15,7 @@ This allows you to interact with smart contracts as if they were JavaScript obje
 To use it standalone:
 
 .. code-block:: javascript
-    var Contract = require('web3-vap-contract');
+    var Contract = require('@vapory/web3-vap-contract');
 
     // set provider for all later instances to use
     Contract.setProvider('ws://localhost:8546');

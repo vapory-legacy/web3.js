@@ -12,7 +12,7 @@ The ``web3-net`` package allows you to interact with the Vapory nodes network pr
 
 .. code-block:: javascript
 
-    var Net = require('web3-net');
+    var Net = require('@vapory/web3-net');
 
     // "Personal.providers.givenProvider" will be set if in an Vapory supported browser.
     var net = new Net(Net.givenProvider || 'ws://some.local-or-remote.node:8546');
@@ -20,7 +20,7 @@ The ``web3-net`` package allows you to interact with the Vapory nodes network pr
 
     // or using the web3 umbrella package
 
-    var Web3 = require('web3');
+    var Web3 = require('@vapory/web3');
     var web3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
 
     // -> web3.vap.net

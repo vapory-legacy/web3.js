@@ -11,7 +11,7 @@ The ``web3-vap`` package allows you to interact with an Vapory blockchain and Va
 
 .. code-block:: javascript
 
-    var Vap = require('web3-vap');
+    var Vap = require('@vapory/web3-vap');
 
     // "Vap.providers.givenProvider" will be set if in an Vapory supported browser.
     var vap = new Vap(Vap.givenProvider || 'ws://some.local-or-remote.node:8546');
@@ -19,7 +19,7 @@ The ``web3-vap`` package allows you to interact with an Vapory blockchain and Va
 
     // or using the web3 umbrella package
 
-    var Web3 = require('web3');
+    var Web3 = require('@vapory/web3');
     var web3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
 
     // -> web3.vap

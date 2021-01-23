@@ -14,7 +14,7 @@ The ``web3-vap-personal`` package allows you to interact with the Vapory node's 
 
 .. code-block:: javascript
 
-    var Personal = require('web3-vap-personal');
+    var Personal = require('@vapory/web3-vap-personal');
 
     // "Personal.providers.givenProvider" will be set if in an Vapory supported browser.
     var personal = new Personal(Personal.givenProvider || 'ws://some.local-or-remote.node:8546');
@@ -22,7 +22,7 @@ The ``web3-vap-personal`` package allows you to interact with the Vapory node's 
 
     // or using the web3 umbrella package
 
-    var Web3 = require('web3');
+    var Web3 = require('@vapory/web3');
     var web3 = new Web3(Web3.givenProvider || 'ws://some.local-or-remote.node:8546');
 
     // -> web3.vap.personal

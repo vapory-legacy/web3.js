@@ -1,16 +1,19 @@
 {
-    "name": "web3-core-requestmanager",
+    "name": "@vapory/web3-core-requestmanager",
     "namespace": "vapory",
+    "publishConfig": {
+        "access": "public"
+    },
     "version": "1.0.0-beta.28",
     "description": "Web3 module to handle requests to external providers.",
     "repository": "https://github.com/vaporyco/web3.js/tree/master/packages/web3-core-requestmanager",
     "license": "LGPL-3.0",
     "main": "src/index.js",
     "dependencies": {
-        "underscore": "1.8.3",
-        "web3-core-helpers": "1.0.0-beta.28",
-        "web3-providers-http": "1.0.0-beta.28",
-        "web3-providers-ipc": "1.0.0-beta.28",
-        "web3-providers-ws": "1.0.0-beta.28"
+        "@vapory/web3-core-helpers": "1.0.0-beta.28",
+        "@vapory/web3-providers-http": "1.0.0-beta.28",
+        "@vapory/web3-providers-ipc": "1.0.0-beta.28",
+        "@vapory/web3-providers-ws": "1.0.0-beta.28",
+        "underscore": "1.8.3"
     }
 }

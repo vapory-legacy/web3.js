@@ -29,7 +29,7 @@ This will expose the `Web3VapContract` object on the window object.
 
 ```js
 // in node.js
-var Web3VapContract = require('web3-vap-contract');
+var Web3VapContract = require('@vapory/web3-vap-contract');
 
 // set provider for all later instances to use
 Web3VapContract.setProvider('ws://localhost:8546');

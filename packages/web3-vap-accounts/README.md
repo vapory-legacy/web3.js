@@ -29,7 +29,7 @@ This will expose the `Web3VapAccounts` object on the window object.
 
 ```js
 // in node.js
-var Web3VapAccounts = require('web3-vap-accounts');
+var Web3VapAccounts = require('@vapory/web3-vap-accounts');
 
 var account = new Web3VapAccounts('ws://localhost:8546');
 account.create();

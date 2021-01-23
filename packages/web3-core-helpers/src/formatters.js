@@ -25,8 +25,8 @@
 
 
 var _ = require('underscore');
-var utils = require('web3-utils');
-var Iban = require('web3-vap-iban');
+var utils = require('@vapory/web3-utils');
+var Iban = require('@vapory/web3-vap-iban');
 
 /**
  * Should the format output to a big number

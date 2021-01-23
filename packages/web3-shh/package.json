@@ -1,15 +1,18 @@
 {
-    "name": "web3-shh",
+    "name": "@vapory/web3-shh",
     "namespace": "vapory",
+    "publishConfig": {
+        "access": "public"
+    },
     "version": "1.0.0-beta.28",
     "description": "Web3 module to interact with the Whisper messaging protocol.",
     "repository": "https://github.com/vaporyco/web3.js/tree/master/packages/web3-shh",
     "license": "LGPL-3.0",
     "main": "src/index.js",
     "dependencies": {
-        "web3-core": "1.0.0-beta.28",
-        "web3-core-method": "1.0.0-beta.28",
-        "web3-core-subscriptions": "1.0.0-beta.28",
-        "web3-net": "1.0.0-beta.28"
+        "@vapory/web3-core": "1.0.0-beta.28",
+        "@vapory/web3-core-method": "1.0.0-beta.28",
+        "@vapory/web3-core-subscriptions": "1.0.0-beta.28",
+        "@vapory/web3-net": "1.0.0-beta.28"
     }
 }

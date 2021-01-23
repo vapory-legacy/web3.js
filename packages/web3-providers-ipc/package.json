@@ -1,14 +1,17 @@
 {
-    "name": "web3-providers-ipc",
+    "name": "@vapory/web3-providers-ipc",
     "namespace": "vapory",
+    "publishConfig": {
+        "access": "public"
+    },
     "version": "1.0.0-beta.28",
     "description": "Module to handle web3 RPC connections over IPC sockets.",
     "repository": "https://github.com/vaporyco/web3.js/tree/master/packages/web3-providers-ipc",
     "license": "LGPL-3.0",
     "main": "src/index.js",
     "dependencies": {
+        "@vapory/web3-core-helpers": "1.0.0-beta.28",
         "oboe": "2.1.3",
-        "underscore": "1.8.3",
-        "web3-core-helpers": "1.0.0-beta.28"
+        "underscore": "1.8.3"
     }
 }

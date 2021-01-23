@@ -1,6 +1,9 @@
 {
-    "name": "web3-core-promievent",
+    "name": "@vapory/web3-core-promievent",
     "namespace": "vapory",
+    "publishConfig": {
+        "access": "public"
+    },
     "version": "1.0.0-beta.28",
     "description": "This package extends eventEmitters with promises to allow chaining as well as multiple final states of a function.",
     "repository": "https://github.com/vaporyco/web3.js/tree/master/packages/web3-core-promievent",

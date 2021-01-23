@@ -29,7 +29,7 @@ This will expose the `Web3VapIban` object on the window object.
 
 ```js
 // in node.js
-var Web3VapIban = require('web3-vap-iban');
+var Web3VapIban = require('@vapory/web3-vap-iban');
 
 var iban = new Web3VapIban('XE75JRZCTTLBSYEQBGAS7GID8DKR7QY0QA3');
 iban.toAddress()
