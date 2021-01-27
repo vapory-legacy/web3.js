@@ -18,10 +18,10 @@ var tests = [{
         currentBlock: 11,
         highestBlock: 11
     },
-    call: 'eth_syncing'
+    call: 'vap_syncing'
 }];
 
-describe('eth', function () {
+describe('vap', function () {
     describe(method, function () {
         tests.forEach(function (test, index) {
             it('property test: ' + index, function (done) {
@@ -41,7 +41,7 @@ describe('eth', function () {
 
 
                 // call
-                var syncing = web3.eth[method](function(e, res){
+                var syncing = web3.vap[method](function(e, res){
                     if(count === 1) {
                         assert.isTrue(res);
                         count++;
@@ -51,7 +51,7 @@ describe('eth', function () {
                         done();
                     }
                 });
-                
+
             });
         });
     });

@@ -8,13 +8,13 @@ var web3 = new Web3();
 var tests = [{
     properties: [new web3._extend.Property({
         name: 'gasPrice',
-        getter: 'eth_gasPrice',
+        getter: 'vap_gasPrice',
         outputFormatter: web3._extend.formatters.outputBigNumberFormatter
     })]
 },{
     methods: [new web3._extend.Method({
         name: 'getBalance',
-        call: 'eth_getBalance',
+        call: 'vap_getBalance',
         params: 2,
         inputFormatter: [web3._extend.utils.toAddress, web3._extend.formatters.inputDefaultBlockNumberFormatter],
         outputFormatter: web3._extend.formatters.outputBigNumberFormatter
@@ -23,12 +23,12 @@ var tests = [{
     property: 'admin',
     properties: [new web3._extend.Property({
         name: 'gasPrice',
-        getter: 'eth_gasPrice',
+        getter: 'vap_gasPrice',
         outputFormatter: web3._extend.formatters.outputBigNumberFormatter
     })],
     methods: [new web3._extend.Method({
         name: 'getBalance',
-        call: 'eth_getBalance',
+        call: 'vap_getBalance',
         params: 2,
         inputFormatter: [web3._extend.utils.toAddress, web3._extend.formatters.inputDefaultBlockNumberFormatter],
         outputFormatter: web3._extend.formatters.outputBigNumberFormatter
@@ -58,7 +58,7 @@ describe('web3', function () {
                             assert.isFunction(web3[test.property]['get'+ property.name.charAt(0).toUpperCase() + property.name.slice(1)]);
                         } else {
                             assert.isObject(web3[property.name]);
-                            assert.isFunction(web3['get'+ property.name.charAt(0).toUpperCase() + property.name.slice(1)]);                        
+                            assert.isFunction(web3['get'+ property.name.charAt(0).toUpperCase() + property.name.slice(1)]);
                         }
                     });
 

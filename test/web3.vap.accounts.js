@@ -4,19 +4,19 @@ var Web3 = require('../index');
 var web3 = new Web3();
 var FakeHttpProvider = require('./helpers/FakeHttpProvider');
 
-var method = 'coinbase';
+var method = 'accounts';
 
 var tests = [{
-    result: '0x47d33b27bb249a2dbab4c0612bf9caf4c1950855',
-    formattedResult: '0x47d33b27bb249a2dbab4c0612bf9caf4c1950855',
-    call: 'eth_'+ method
+    result: ['0x47d33b27bb249a2dbab4c0612bf9caf4c1950855'],
+    formattedResult: ['0x47d33b27bb249a2dbab4c0612bf9caf4c1950855'],
+    call: 'vap_'+ method
 }];
 
-describe('web3.eth', function () {
+describe('web3.vap', function () {
     describe(method, function () {
         tests.forEach(function (test, index) {
             it('property test: ' + index, function () {
-                
+
                 // given
                 var provider = new FakeHttpProvider();
                 web3.setProvider(provider);
@@ -27,9 +27,9 @@ describe('web3.eth', function () {
                     assert.deepEqual(payload.params, []);
                 });
 
-                // when 
-                var result = web3.eth[method];
-                
+                // when
+                var result = web3.vap[method];
+
                 // then
                 assert.deepEqual(test.formattedResult, result);
             });

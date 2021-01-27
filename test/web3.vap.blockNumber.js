@@ -9,14 +9,14 @@ var method = 'blockNumber';
 var tests = [{
     result: '0xb',
     formattedResult: 11,
-    call: 'eth_'+ method
+    call: 'vap_'+ method
 }];
 
-describe('web3.eth', function () {
+describe('web3.vap', function () {
     describe(method, function () {
         tests.forEach(function (test, index) {
             it('property test: ' + index, function () {
-                
+
                 // given
                 var provider = new FakeHttpProvider();
                 web3.setProvider(provider);
@@ -27,15 +27,15 @@ describe('web3.eth', function () {
                     assert.deepEqual(payload.params, []);
                 });
 
-                // when 
-                var result = web3.eth[method];
-                
+                // when
+                var result = web3.vap[method];
+
                 // then
                 assert.strictEqual(test.formattedResult, result);
             });
-            
+
             it('async get property test: ' + index, function (done) {
-                
+
                 // given
                 var provider = new FakeHttpProvider();
                 web3.setProvider(provider);
@@ -46,12 +46,12 @@ describe('web3.eth', function () {
                     assert.deepEqual(payload.params, []);
                 });
 
-                // when 
-                web3.eth.getBlockNumber(function (err, result) {
+                // when
+                web3.vap.getBlockNumber(function (err, result) {
                     assert.strictEqual(test.formattedResult, result);
                     done();
                 });
-                
+
             });
         });
     });

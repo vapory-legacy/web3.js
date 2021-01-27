@@ -3,9 +3,9 @@ var FakeHttpProvider = require('./helpers/FakeHttpProvider');
 var Web3 = require('../index');
 
 
-describe('web3.eth.contract', function() {
+describe('web3.vap.contract', function() {
     it('should create simple contract with one method from abi with explicit type name', function () {
-        
+
         // given
         var description =  [{
             "name": "test(uint256)",
@@ -23,18 +23,18 @@ describe('web3.eth.contract', function() {
             ]
         }];
         var address = '0x1234567890123456789012345678901234567892';
-    
+
         // when
         var web3 = new Web3();
-        var myCon = web3.eth.contract(description).at(address);
+        var myCon = web3.vap.contract(description).at(address);
 
         // then
-        assert.equal('function', typeof myCon.test); 
+        assert.equal('function', typeof myCon.test);
         assert.equal('function', typeof myCon.test['uint256']);
     });
 
     it('should create simple contract with one method from abi with implicit type name', function () {
-    
+
         // given
         var description =  [{
             "name": "test",
@@ -55,15 +55,15 @@ describe('web3.eth.contract', function() {
 
         // when
         var web3 = new Web3();
-        var myCon = web3.eth.contract(description).at(address);
+        var myCon = web3.vap.contract(description).at(address);
 
         // then
-        assert.equal('function', typeof myCon.test); 
+        assert.equal('function', typeof myCon.test);
         assert.equal('function', typeof myCon.test['uint256']);
-    }); 
+    });
 
     it('should create contract with multiple methods', function () {
-        
+
         // given
         var description = [{
             "name": "test",
@@ -95,20 +95,20 @@ describe('web3.eth.contract', function() {
             ]
         }];
         var address = '0x1234567890123456789012345678901234567892';
-        
+
         // when
         var web3 = new Web3();
-        var myCon = web3.eth.contract(description).at(address);
+        var myCon = web3.vap.contract(description).at(address);
 
         // then
-        assert.equal('function', typeof myCon.test); 
+        assert.equal('function', typeof myCon.test);
         assert.equal('function', typeof myCon.test['uint256']);
-        assert.equal('function', typeof myCon.test2); 
+        assert.equal('function', typeof myCon.test2);
         assert.equal('function', typeof myCon.test2['uint256']);
     });
 
     it('should create contract with overloaded methods', function () {
-    
+
         // given
         var description = [{
             "name": "test",
@@ -140,19 +140,19 @@ describe('web3.eth.contract', function() {
             ]
         }];
         var address = '0x1234567890123456789012345678901234567892';
-        
+
         // when
         var web3 = new Web3();
-        var myCon = web3.eth.contract(description).at(address);
+        var myCon = web3.vap.contract(description).at(address);
 
         // then
-        assert.equal('function', typeof myCon.test); 
+        assert.equal('function', typeof myCon.test);
         assert.equal('function', typeof myCon.test['uint256']);
-        assert.equal('function', typeof myCon.test['string']); 
+        assert.equal('function', typeof myCon.test['string']);
     });
 
     it('should create contract with no methods', function () {
-        
+
         // given
         var description =  [{
             "name": "test(uint256)",
@@ -172,15 +172,15 @@ describe('web3.eth.contract', function() {
 
         // when
         var web3 = new Web3();
-        var myCon = web3.eth.contract(description).at(address);
+        var myCon = web3.vap.contract(description).at(address);
 
         // then
-        assert.equal('undefined', typeof myCon.test); 
+        assert.equal('undefined', typeof myCon.test);
 
     });
 
     it('should create contract with one event', function () {
-        
+
         // given
         var description =  [{
             "name": "test",
@@ -201,11 +201,11 @@ describe('web3.eth.contract', function() {
 
         // when
         var web3 = new Web3();
-        var myCon = web3.eth.contract(description).at(address);
+        var myCon = web3.vap.contract(description).at(address);
 
         // then
-        assert.equal('function', typeof myCon.test); 
-        assert.equal('function', typeof myCon.test['uint256']); 
+        assert.equal('function', typeof myCon.test);
+        assert.equal('function', typeof myCon.test['uint256']);
 
     });
 
@@ -230,18 +230,18 @@ describe('web3.eth.contract', function() {
         provider.injectValidation(function (payload) {
             if (steps === 1) {
                 assert.equal(payload.jsonrpc, '2.0');
-                assert.equal(payload.method, 'eth_sendTransaction');
+                assert.equal(payload.method, 'vap_sendTransaction');
                 assert.equal(payload.params[0].data, code + '0000000000000000000000000000000000000000000000000000000000000002');
                 steps++;
 
             } else if (steps === 2) {
                 assert.equal(payload.jsonrpc, '2.0');
-                assert.equal(payload.method, 'eth_newBlockFilter');
+                assert.equal(payload.method, 'vap_newBlockFilter');
                 steps++;
             }
         });
-        
-        web3.eth.contract(description).new(2, {from: address, data: code}, function(e, myCon){
+
+        web3.vap.contract(description).new(2, {from: address, data: code}, function(e, myCon){
                 done();
                 web3.stopWatching();
         });

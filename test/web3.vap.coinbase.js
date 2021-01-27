@@ -4,15 +4,15 @@ var Web3 = require('../index');
 var web3 = new Web3();
 var FakeHttpProvider = require('./helpers/FakeHttpProvider');
 
-var method = 'hashrate';
+var method = 'coinbase';
 
 var tests = [{
-    result: '0x788a8',
-    formattedResult: 493736,
-    call: 'eth_'+ method
+    result: '0x47d33b27bb249a2dbab4c0612bf9caf4c1950855',
+    formattedResult: '0x47d33b27bb249a2dbab4c0612bf9caf4c1950855',
+    call: 'vap_'+ method
 }];
 
-describe('web3.eth', function () {
+describe('web3.vap', function () {
     describe(method, function () {
         tests.forEach(function (test, index) {
             it('property test: ' + index, function () {
@@ -28,14 +28,10 @@ describe('web3.eth', function () {
                 });
 
                 // when
-                var result = web3.eth[method];
+                var result = web3.vap[method];
 
                 // then
-                assert.strictEqual(test.formattedResult, result);
-
-                // clear the validation
-                provider.injectValidation(function () {});
-                web3.reset();
+                assert.deepEqual(test.formattedResult, result);
             });
         });
     });

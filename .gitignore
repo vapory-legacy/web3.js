@@ -11,8 +11,8 @@
 *un~
 .DS_Store
 */**/.DS_Store
-ethereum/ethereum
-ethereal/ethereal
+vapory/vapory
+vaporeal/vaporeal
 example/js
 node_modules
 bower_components

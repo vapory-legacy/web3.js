@@ -18,13 +18,13 @@ var tests = [{
     },
     result: '0xb',
     formattedResult: '0xb',
-    call: 'eth_'+ method
+    call: 'vap_'+ method
 }];
 
 describe('async', function () {
     tests.forEach(function (test, index) {
         it('test: ' + index, function (done) {
-            
+
             // given
             var provider = new FakeHttpProvider();
             web3.setProvider(provider);
@@ -35,20 +35,20 @@ describe('async', function () {
                 assert.deepEqual(payload.params, [test.formattedInput]);
             });
 
-            // when 
-            web3.eth[method](test.input, function(error, result){
+            // when
+            web3.vap[method](test.input, function(error, result){
 
                 // then
                 assert.isNull(error);
                 assert.strictEqual(test.formattedResult, result);
-                
+
                 done();
             });
-            
+
         });
 
         it('error test: ' + index, function (done) {
-            
+
             // given
             var provider = new FakeHttpProvider();
             web3.setProvider(provider);
@@ -62,8 +62,8 @@ describe('async', function () {
                 assert.deepEqual(payload.params, [test.formattedInput]);
             });
 
-            // when 
-            web3.eth[method](test.input, function(error, result){
+            // when
+            web3.vap[method](test.input, function(error, result){
 
                 // then
                 assert.isUndefined(result);
@@ -71,7 +71,7 @@ describe('async', function () {
 
                 done();
             });
-            
+
         });
     });
 });

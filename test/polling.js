@@ -6,40 +6,40 @@ var FakeHttpProvider = require('./helpers/FakeHttpProvider');
 var utils = require('../lib/utils/utils');
 
 var tests = [{
-    protocol: 'eth',
+    protocol: 'vap',
     args: ['latest'],
     firstResult: 1,
     firstPayload: {
-        method: "eth_newBlockFilter",
+        method: "vap_newBlockFilter",
         params: []
     },
     secondResult: ['0x1234'],
     secondPayload: {
-        method: "eth_getFilterChanges"
+        method: "vap_getFilterChanges"
     }
 },
 {
-    protocol: 'eth',
+    protocol: 'vap',
     args: ['pending'],
     firstResult: 1,
     firstPayload: {
-        method: "eth_newPendingTransactionFilter",
+        method: "vap_newPendingTransactionFilter",
         params: []
     },
     secondResult: ['0x1234'],
     secondPayload: {
-        method: "eth_getFilterChanges"
+        method: "vap_getFilterChanges"
     }
 }];
 
 var testPolling = function (tests) {
-    
-    describe('web3.eth.filter.polling', function () {
+
+    describe('web3.vap.filter.polling', function () {
         tests.forEach(function (test, index) {
             it('should create && successfully poll filter', function (done) {
 
                 // given
-                var provider = new FakeHttpProvider(); 
+                var provider = new FakeHttpProvider();
                 web3.setProvider(provider);
                 web3.reset();
                 provider.injectResult(test.firstResult);
@@ -77,7 +77,7 @@ var testPolling = function (tests) {
             it('should create && successfully poll filter when passed as callback', function (done) {
 
                 // given
-                var provider = new FakeHttpProvider(); 
+                var provider = new FakeHttpProvider();
                 web3.setProvider(provider);
                 web3.reset();
                 provider.injectResult(test.firstResult);
@@ -114,7 +114,7 @@ var testPolling = function (tests) {
                 var filter = web3[test.protocol].filter.apply(web3[test.protocol], test.args);
                 provider.injectBatchResults([test.secondResult]);
             });
-        }); 
+        });
     });
 };
 

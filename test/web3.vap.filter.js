@@ -20,7 +20,7 @@ var tests = [{
     }],
     result: '0xf',
     formattedResult: '0xf',
-    call: 'eth_newFilter'
+    call: 'vap_newFilter'
 },{
     args: [{
         fromBlock: 'latest',
@@ -35,22 +35,22 @@ var tests = [{
     }],
     result: '0xf',
     formattedResult: '0xf',
-    call: 'eth_newFilter'
+    call: 'vap_newFilter'
 },{
     args: ['latest'],
     formattedArgs: [],
     result: '0xf',
     formattedResult: '0xf',
-    call: 'eth_newBlockFilter'
+    call: 'vap_newBlockFilter'
 },{
     args: ['pending'],
     formattedArgs: [],
     result: '0xf',
     formattedResult: '0xf',
-    call: 'eth_newPendingTransactionFilter'
+    call: 'vap_newPendingTransactionFilter'
 }];
 
-describe('web3.eth', function () {
+describe('web3.vap', function () {
     describe(method, function () {
         tests.forEach(function (test, index) {
             it('property test: ' + index, function () {
@@ -67,7 +67,7 @@ describe('web3.eth', function () {
                });
 
                // call
-               var filter = web3.eth[method].apply(web3.eth, test.args);
+               var filter = web3.vap[method].apply(web3.vap, test.args);
 
                // test filter.get
                if(typeof test.args === 'object') {
@@ -77,7 +77,7 @@ describe('web3.eth', function () {
                    provider.injectResult(logs);
                    provider.injectValidation(function (payload) {
                        assert.equal(payload.jsonrpc, '2.0');
-                       assert.equal(payload.method, 'eth_getFilterLogs');
+                       assert.equal(payload.method, 'vap_getFilterLogs');
                        assert.deepEqual(payload.params, [test.formattedResult]);
                    });
 
