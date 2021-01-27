@@ -12,7 +12,7 @@ var tests = [
     { obj: '{}', is: false},
     { obj: '{"a": 123, "b" :3,}', is: false},
     { obj: '{"c" : 2}', is: false},
-    { obj: 'XE81VAPXREGGAVOFYORK', is: true},
+    { obj: 'XE42VAPXREGGAVOFYORK', is: true},
     { obj: 'XE82VAPXREGGAVOFYORK', is: false}, // control number is invalid
     { obj: 'XE81ETCXREGGAVOFYORK', is: false},
     { obj: 'XE81VAPXREGGAVOFYORKD', is: false},
